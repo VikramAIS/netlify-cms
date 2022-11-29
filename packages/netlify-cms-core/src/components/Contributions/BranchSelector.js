@@ -27,6 +27,7 @@ border-bottom:1px solid #ccc;
 border-radius:1px;
 &:hover {
     background-color:#ccc;
+    cursor: pointer;
   }
 `;
 

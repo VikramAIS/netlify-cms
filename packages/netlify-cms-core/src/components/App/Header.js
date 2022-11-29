@@ -93,6 +93,8 @@ const AppHeaderButton = styled.button`
 const AppHeaderNavLink = AppHeaderButton.withComponent(NavLink);
 
 const AppHeaderActions = styled.div`
+  position: fixed;
+  right: 25px;
   display: inline-flex;
   align-items: center;
 `;
@@ -111,6 +113,24 @@ const AppHeaderQuickNewButton = styled(StyledDropdownButton)`
 const AppHeaderNavList = styled.ul`
   display: flex;
   margin: 0;
+  list-style: none;
+`;
+
+const CustomBrandLogo = styled.img`
+  display: flex;
+  position: fixed;
+  top: 10px;
+  left:25px;
+  height:40px;
+  list-style: none;
+`;
+
+const DefaultBrandLogo = styled(Icon)`
+  display: flex;
+  position: fixed;
+  top: 10px;
+  left:25px;
+  height:40px;
   list-style: none;
 `;
 
@@ -147,8 +167,18 @@ class Header extends React.Component {
     }
   };
 
+  renderBrandedLogo(logo_url)
+  {
+    if(logo_url) {
+      return <CustomBrandLogo src={logo_url} alt="brand Logo"/> 
+    }
+
+    return <DefaultBrandLogo size="150px" type="netlify-cms" />
+  }
+
   render() {
     const {
+      logo_url, 
       user,
       collections,
       onLogoutClick,
@@ -167,6 +197,7 @@ class Header extends React.Component {
 
     return (
       <AppHeader>
+        {this.renderBrandedLogo(logo_url)}
         <AppHeaderContent>
           <nav>
             <AppHeaderNavList>

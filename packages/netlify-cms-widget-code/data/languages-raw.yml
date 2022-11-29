@@ -6131,3 +6131,26 @@ xBase:
   tm_scope: source.harbour
   ace_mode: text
   language_id: 421
+Mermaid:
+  type: prose
+  aliases:
+  - pandoc
+  ace_mode: mermaid
+  codemirror_mode: gfm
+  codemirror_mime_type: text/x-gfm
+  wrap: true
+  extensions:
+  - ".md"
+  - ".markdown"
+  - ".mdown"
+  - ".mdwn"
+  - ".mdx"
+  - ".mkd"
+  - ".mkdn"
+  - ".mkdown"
+  - ".ronn"
+  - ".workbook"
+  filenames:
+  - contents.lr
+  tm_scope: source.gfm
+  language_id: 422

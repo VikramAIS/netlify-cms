@@ -24,7 +24,7 @@ const SidebarContainer = styled.aside`
   width: 250px;
   padding: 8px 0 12px;
   position: fixed;
-  max-height: calc(100vh - 112px);
+  max-height: calc(100vh - 150px);
   display: flex;
   flex-direction: column;
 `;

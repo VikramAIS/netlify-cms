@@ -97,6 +97,7 @@ const EditorContainer = styled.div`
   overflow: hidden;
   padding-top: 66px;
   background-color: ${colors.background};
+  z-index: 4000;
 `;
 
 const Editor = styled.div`

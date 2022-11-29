@@ -25,6 +25,7 @@ import Workflow from '../Workflow/Workflow';
 import Editor from '../Editor/Editor';
 import NotFoundPage from './NotFoundPage';
 import Header from './Header';
+import Footer from './Footer';
 
 TopBarProgress.config({
   barColors: {
@@ -39,6 +40,7 @@ const AppMainContainer = styled.div`
   min-width: 800px;
   max-width: 1440px;
   margin: 0 auto;
+  margin-bottom: 50px;
 `;
 
 const ErrorContainer = styled.div`
@@ -182,6 +184,7 @@ class App extends React.Component {
       <>
         <Notifs CustomComponent={Toast} />
         <Header
+          logo_url={config.logo_url}
           user={user}
           collections={collections}
           onCreateEntryClick={createNewEntry}
@@ -254,6 +257,7 @@ class App extends React.Component {
           {useMediaLibrary ? <MediaLibrary /> : null}
           <Contributions />
         </AppMainContainer>
+        <Footer footerText={config.footer_text}></Footer>
       </>
     );
   }
