@@ -7,6 +7,7 @@ import { translate } from 'react-polyglot';
 import { debounce } from 'lodash';
 
 import { history, navigateToCollection, navigateToNewEntry } from '../../routing/history';
+import { openContributionsList as openContributions } from '../../actions/contributions';
 import { logoutUser } from '../../actions/auth';
 import {
   loadEntry,
@@ -311,6 +312,11 @@ export class Editor extends React.Component {
     }, 0);
   };
 
+  handleOpenContributions = () => {
+    const { openContributions } = this.props;
+    return openContributions();
+  }
+
   handleDeleteUnpublishedChanges = async () => {
     const { entryDraft, collection, slug, deleteUnpublishedEntry, loadEntry, isModification, t } =
       this.props;
@@ -386,6 +392,7 @@ export class Editor extends React.Component {
         onValidate={changeDraftFieldValidation}
         onPersist={this.handlePersistEntry}
         onDelete={this.handleDeleteEntry}
+        onOpenContributions={this.handleOpenContributions}
         onDeleteUnpublishedChanges={this.handleDeleteUnpublishedChanges}
         onChangeStatus={this.handleChangeStatus}
         onPublish={this.handlePublishEntry}
@@ -489,6 +496,7 @@ const mapDispatchToProps = {
   unpublishPublishedEntry,
   deleteUnpublishedEntry,
   logoutUser,
+  openContributions
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withWorkflow(translate()(Editor)));

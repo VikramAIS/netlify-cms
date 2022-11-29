@@ -1,0 +1,1 @@
+export const CURRENT_BRANCH_KEY='cms-backend-current-branch'

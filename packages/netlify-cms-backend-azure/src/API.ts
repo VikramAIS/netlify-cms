@@ -211,6 +211,7 @@ interface AzureApiConfig {
   apiRoot: string;
   repo: { org: string; project: string; repoName: string };
   branch: string;
+  baseBranch: string;
   squashMerges: boolean;
   initialWorkflowStatus: string;
   cmsLabelPrefix: string;
@@ -221,6 +222,7 @@ export default class API {
   apiVersion: string;
   token: string;
   branch: string;
+  baseBranch: string;
   mergeStrategy: string;
   endpointUrl: string;
   initialWorkflowStatus: string;
@@ -232,6 +234,7 @@ export default class API {
     this.endpointUrl = `${apiRoot}/${repo.org}/${repo.project}/_apis/git/repositories/${repo.repoName}`;
     this.token = token;
     this.branch = config.branch;
+    this.baseBranch = config.baseBranch;
     this.mergeStrategy = config.squashMerges ? 'squash' : 'noFastForward';
     this.initialWorkflowStatus = config.initialWorkflowStatus;
     this.apiVersion = config.apiVersion;
@@ -789,5 +792,33 @@ export default class API {
       name: pullRequest.sourceRefName,
       objectId: pullRequest.lastMergeSourceCommit.commitId,
     });
+  }
+
+  async createBranch(branchName: string): Promise<void> {
+    const ref = await this.getRef(this.baseBranch);
+    const formattedBranchName = `users/${(await this.user()).name.toLocaleLowerCase().replaceAll(" ","-")}/v2/${branchName.toLowerCase().replaceAll(" ","-")}`;
+    console.log(formattedBranchName)
+    const refUpdate = [
+        {
+          name: this.branchToRef(formattedBranchName),
+          newObjectId: ref.objectId,
+          oldObjectId: '0000000000000000000000000000000000000000',
+        },
+      ];
+
+    await this.requestJSON({
+      method: 'POST',
+      url: `${this.endpointUrl}/refs`,
+      body: JSON.stringify(refUpdate),
+    });
+
+  }
+
+  async listBranches(): Promise<string[]> {
+    const { value: refs } = await this.requestJSON<AzureArray<AzureRef>>({
+      url: `${this.endpointUrl}/refs`
+    });
+
+    return refs.map(x => this.refToBranch(x.name))
   }
 }

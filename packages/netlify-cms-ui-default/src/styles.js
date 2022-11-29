@@ -32,6 +32,7 @@ const fonts = {
  */
 const colorsRaw = {
   white: '#fff',
+  aisBlue: '#0F5996',
   grayLight: '#eff0f4',
   gray: '#798291',
   grayDark: '#313d3e',
@@ -59,7 +60,8 @@ const colors = {
   text: colorsRaw.gray,
   textLight: colorsRaw.white,
   textLead: colorsRaw.grayDark,
-  background: colorsRaw.grayLight,
+  background: colorsRaw.white,
+  headerBackgound: colorsRaw.aisBlue,
   foreground: colorsRaw.white,
   active: colorsRaw.blue,
   activeBackground: colorsRaw.blueLight,

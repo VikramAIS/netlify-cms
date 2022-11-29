@@ -15,6 +15,7 @@ import {
   entriesByFolder,
   contentKeyFromBranch,
   getBlobSHA,
+  CURRENT_BRANCH_KEY
 } from 'netlify-cms-lib-util';
 
 import AuthenticationPage from './AuthenticationPage';
@@ -70,6 +71,7 @@ export default class Azure implements Implementation {
     repoName: string;
   };
   branch: string;
+  baseBranch: string;
   apiRoot: string;
   apiVersion: string;
   token: string | null;
@@ -87,7 +89,8 @@ export default class Azure implements Implementation {
     };
 
     this.repo = parseAzureRepo(config);
-    this.branch = config.backend.branch || 'master';
+    this.branch = localStorage.getItem(CURRENT_BRANCH_KEY) || config.backend.branch || 'master';
+    this.baseBranch = config.backend.branch || 'master';
     this.apiRoot = config.backend.api_root || 'https://dev.azure.com';
     this.apiVersion = config.backend.api_version || '6.1-preview';
     this.token = '';
@@ -100,6 +103,19 @@ export default class Azure implements Implementation {
 
   isGitBackend() {
     return true;
+  }
+
+  changeBranch(newBranchName:string) {
+    this.branch = newBranchName;
+    this.api!.branch = newBranchName;
+  }
+
+  async listBranches() {
+    return await this.api!.listBranches()
+  }
+
+  async createBranch(branchName: string) {
+    return await this.api!.createBranch(branchName);
   }
 
   async status() {
@@ -130,6 +146,7 @@ export default class Azure implements Implementation {
         apiVersion: this.apiVersion,
         repo: this.repo,
         branch: this.branch,
+        baseBranch: this.baseBranch,
         squashMerges: this.squashMerges,
         cmsLabelPrefix: this.cmsLabelPrefix,
         initialWorkflowStatus: this.options.initialWorkflowStatus,

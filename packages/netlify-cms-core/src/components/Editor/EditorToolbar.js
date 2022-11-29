@@ -180,6 +180,10 @@ const DeleteButton = styled(ToolbarButton)`
   ${buttons.lightRed};
 `;
 
+const ChangeContributionButton = styled(ToolbarButton)`
+  ${buttons.tealLight};
+`;
+
 const SaveButton = styled(ToolbarButton)`
   ${buttons.lightBlue};
   &[disabled] {
@@ -251,6 +255,7 @@ export class EditorToolbar extends React.Component {
     onPersistAndDuplicate: PropTypes.func.isRequired,
     showDelete: PropTypes.bool.isRequired,
     onDelete: PropTypes.func.isRequired,
+    onOpenContributions: PropTypes.func.isRequired,
     onDeleteUnpublishedChanges: PropTypes.func.isRequired,
     onChangeStatus: PropTypes.func.isRequired,
     onPublish: PropTypes.func.isRequired,
@@ -290,7 +295,7 @@ export class EditorToolbar extends React.Component {
   }
 
   renderSimpleControls = () => {
-    const { collection, hasChanged, isNewEntry, showDelete, onDelete, t } = this.props;
+    const { collection, hasChanged, isNewEntry, showDelete, onDelete, onOpenContributions, t } = this.props;
     const canCreate = collection.get('create');
 
     return (
@@ -302,6 +307,10 @@ export class EditorToolbar extends React.Component {
           {showDelete ? (
             <DeleteButton onClick={onDelete}>{t('editor.editorToolbar.deleteEntry')}</DeleteButton>
           ) : null}
+          
+        </div>
+        <div>
+        <ChangeContributionButton onClick={onOpenContributions}>Change Contribution</ChangeContributionButton>
         </div>
       </>
     );

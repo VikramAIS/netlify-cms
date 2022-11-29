@@ -19,6 +19,7 @@ const en = {
       content: 'Contents',
       workflow: 'Workflow',
       media: 'Media',
+      contributions: 'Contributions',
       quickAdd: 'Quick add',
     },
     app: {
@@ -237,6 +238,21 @@ const en = {
       uploading: 'Uploading...',
       upload: 'Upload',
       download: 'Download',
+      deleting: 'Deleting...',
+      deleteSelected: 'Delete selected',
+      chooseSelected: 'Choose selected',
+    },
+  },
+  contributions: {
+    list: {
+      onDelete: 'Are you sure you want to delete selected contribution?'
+    },
+    contributionsModal: {
+      loading: 'Loading...',
+      noResults: 'No results.',
+      noContributionsFound: 'No contributions found.',
+      title: 'Contributions',
+      search: 'Search...',
       deleting: 'Deleting...',
       deleteSelected: 'Delete selected',
       chooseSelected: 'Choose selected',

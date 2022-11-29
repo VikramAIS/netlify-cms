@@ -127,6 +127,9 @@ export interface Implementation {
   logout: () => Promise<void> | void | null;
   getToken: () => Promise<string | null>;
 
+  changeBranch: (newBranchName: string) => void;
+  listBranches: () => Promise<string[]>;
+  createBranch: (branchName: string) => Promise<void>;
   getEntry: (path: string) => Promise<ImplementationEntry>;
   entriesByFolder: (
     folder: string,

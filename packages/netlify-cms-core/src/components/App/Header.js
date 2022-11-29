@@ -35,7 +35,7 @@ function AppHeader(props) {
         position: sticky;
         width: 100%;
         top: 0;
-        background-color: ${colors.foreground};
+        background-color: ${colors.headerBackgound};
         z-index: ${zIndex.zIndex300};
         height: ${lengths.topBarHeight};
       `}
@@ -56,7 +56,7 @@ const AppHeaderContent = styled.div`
 const AppHeaderButton = styled.button`
   ${buttons.button};
   background: none;
-  color: #7b8290;
+  color: #fff;
   font-family: inherit;
   font-size: 16px;
   font-weight: 500;
@@ -153,6 +153,7 @@ class Header extends React.Component {
       collections,
       onLogoutClick,
       openMediaLibrary,
+      openContributionsList,
       hasWorkflow,
       displayUrl,
       isTestRepo,
@@ -195,6 +196,12 @@ class Header extends React.Component {
                   </AppHeaderButton>
                 </li>
               )}
+             <li>
+                  <AppHeaderButton onClick={openContributionsList}>
+                    <Icon type="write" />
+                    {t('app.header.contributions')}
+                  </AppHeaderButton>
+                </li>
             </AppHeaderNavList>
           </nav>
           <AppHeaderActions>

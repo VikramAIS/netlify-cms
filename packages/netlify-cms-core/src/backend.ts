@@ -386,6 +386,18 @@ export class Backend {
     return this.implementation.authComponent();
   }
 
+  changeBranch(newBranchName: string) {
+    return this.implementation.changeBranch(newBranchName);
+  }
+
+  listBranches() {
+    return this.implementation.listBranches();
+  }
+
+  createBranch(branchName: string) {
+    return this.implementation.createBranch(branchName);
+  }
+
   authenticate(credentials: Credentials) {
     return this.implementation.authenticate(credentials).then(user => {
       this.user = { ...user, backendName: this.backendName };

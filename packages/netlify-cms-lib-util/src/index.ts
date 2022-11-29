@@ -55,6 +55,7 @@ import {
   parsePointerFile,
   getPointerFileForMediaFileObj,
 } from './git-lfs';
+import { CURRENT_BRANCH_KEY } from './contributionUtil';
 
 import type { PointerFile as PF } from './git-lfs';
 import type { FetchError as FE, ApiRequest as AR } from './API';
@@ -128,6 +129,7 @@ export const NetlifyCmsLibUtil = {
   readFile,
   readFileMetadata,
   CMS_BRANCH_PREFIX,
+  CURRENT_BRANCH_KEY,
   generateContentKey,
   isCMSLabel,
   labelToStatus,
@@ -184,6 +186,7 @@ export {
   readFile,
   readFileMetadata,
   CMS_BRANCH_PREFIX,
+  CURRENT_BRANCH_KEY,
   generateContentKey,
   isCMSLabel,
   labelToStatus,

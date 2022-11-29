@@ -14,7 +14,9 @@ import { loginUser, logoutUser } from '../../actions/auth';
 import { currentBackend } from '../../backend';
 import { createNewEntry } from '../../actions/collections';
 import { openMediaLibrary } from '../../actions/mediaLibrary';
+import { openContributionsList }  from '../../actions/contributions';
 import MediaLibrary from '../MediaLibrary/MediaLibrary';
+import Contributions from '../Contributions/Contributions'
 import { Toast } from '../UI';
 import { history } from '../../routing/history';
 import { SIMPLE, EDITORIAL_WORKFLOW } from '../../constants/publishModes';
@@ -84,6 +86,7 @@ class App extends React.Component {
     siteId: PropTypes.string,
     useMediaLibrary: PropTypes.bool,
     openMediaLibrary: PropTypes.func.isRequired,
+    openContributionsList: PropTypes.func.isRequired,
     showMediaButton: PropTypes.bool,
     t: PropTypes.func.isRequired,
   };
@@ -151,6 +154,7 @@ class App extends React.Component {
       publishMode,
       useMediaLibrary,
       openMediaLibrary,
+      openContributionsList,
       t,
       showMediaButton,
     } = this.props;
@@ -183,6 +187,7 @@ class App extends React.Component {
           onCreateEntryClick={createNewEntry}
           onLogoutClick={logoutUser}
           openMediaLibrary={openMediaLibrary}
+          openContributionsList={openContributionsList}
           hasWorkflow={hasWorkflow}
           displayUrl={config.display_url}
           isTestRepo={config.backend.name === 'test-repo'}
@@ -247,6 +252,7 @@ class App extends React.Component {
             <Route component={NotFoundPage} />
           </Switch>
           {useMediaLibrary ? <MediaLibrary /> : null}
+          <Contributions />
         </AppMainContainer>
       </>
     );
@@ -274,6 +280,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   openMediaLibrary,
+  openContributionsList,
   loginUser,
   logoutUser,
 };

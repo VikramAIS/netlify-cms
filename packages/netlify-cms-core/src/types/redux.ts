@@ -10,6 +10,7 @@ import type { Deploys } from '../reducers/deploys';
 import type { Search } from '../reducers/search';
 import type { GlobalUI } from '../reducers/globalUI';
 import type { formatExtensions } from '../formats/formats';
+import type { Contributions } from '../reducers/contributions';
 
 export type CmsBackendType =
   | 'azure'
@@ -696,6 +697,7 @@ export interface State {
   integrations: Integrations;
   medias: Medias;
   mediaLibrary: MediaLibrary;
+  contributions: Contributions;
   search: Search;
   notifs: { message: { key: string }; kind: string; id: number }[];
   status: Status;
